@@ -218,7 +218,7 @@ public class PuertsConfig2
 	{
 		get
 		{
-			return Path.Combine(Application.dataPath, "csharp", "gen") + "/";
+			return Path.Combine(Application.dataPath, "Gen") + "/";
 		}
 	}
 }
