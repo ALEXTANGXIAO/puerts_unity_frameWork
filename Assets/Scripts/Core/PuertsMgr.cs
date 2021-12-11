@@ -6,7 +6,6 @@ public class PuertsMgr : UnitySingleton<PuertsMgr>
 {
     #region 属性
     public delegate void JavaScriptMain(PuertsMgr instance);
-    public bool WaitForDebugger = false;
     private JsEnv m_JsEnv;
     private bool m_Init;
     public PuertsLoader Loader { get; private set; }
@@ -75,7 +74,7 @@ public class PuertsMgr : UnitySingleton<PuertsMgr>
 
 	    this.RegisterClasses(m_JsEnv);
 
-	    if (WaitForDebugger)
+	    if (GameApp.Instance.WaitForDebugger)
 		{
 			await JsEnv.WaitDebuggerAsync();
 	    }

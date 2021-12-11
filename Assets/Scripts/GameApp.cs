@@ -1,4 +1,4 @@
-﻿using Puerts;
+using Puerts;
 using UnityEngine;
 
 public class GameApp : UnitySingleton<GameApp>
@@ -12,7 +12,9 @@ public class GameApp : UnitySingleton<GameApp>
 
     public DEV_MODE Mode = DEV_MODE.FWK;
 
-    void Start()
+    public bool WaitForDebugger = false;
+
+	void Start()
     {
         PuertsMgr.Instance.Init();
     }
