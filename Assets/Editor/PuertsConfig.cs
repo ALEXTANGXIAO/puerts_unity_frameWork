@@ -22,6 +22,7 @@ public class PuertsConfig2
 
 			namespaces.Add("System");
 			namespaces.Add("UnityEngine");
+			namespaces.Add("UnityEngine.UI");
 			namespaces.Add("UnityEngine.Networking");
 			namespaces.Add("UnityEngine.ParticleSystem");
 			namespaces.Add("UnityEngine.SceneManagement");
