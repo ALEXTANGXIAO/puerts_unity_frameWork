@@ -7,6 +7,10 @@ if (!PRODUCTION) {
 	};
 }
 
+import {UIManager} from "./Manager/UI/UIManager";
+import {UnityEngine} from 'csharp'
+import {LoginUI} from 'UI/LoginUI'
+
 interface IScriptLauncher {
 	JS_start(): void;
 	JS_fixedUpdate(delta: number): void;
@@ -34,7 +38,9 @@ class JavaScriptApplication {
 	}
 
 	private initialize() {
-
+		let ui = UIManager.Instance(UIManager);
+		ui.Init()
+		var loginUI = ui.ShowWindow() as LoginUI;
 	}
 
 	private start() {
@@ -47,7 +53,6 @@ class JavaScriptApplication {
 
 	private update(delta: number) {
 		WebAPI.tick();
-		console.log(`Update`);
 	}
 
 	private lateUpdate(delta: number) {

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Puerts;
 using UnityEngine;
 
@@ -50,22 +50,43 @@ public class PuertsMgr : UnitySingleton<PuertsMgr>
 
         }
 
-        m_JsEnv = new JsEnv(Loader, DebuggerPort);
 
-        this.RegisterClasses(m_JsEnv);
+		RunScript();
+        //m_JsEnv = new JsEnv(Loader, DebuggerPort);
 
-        if (WaitForDebugger)
-        {
-            JsEnv.WaitDebugger();
-        }
+        //this.RegisterClasses(m_JsEnv);
 
-        var javascript = m_JsEnv.Eval<JavaScriptMain>("require('bootstrap.js');", Loader.GetScriptDebugPath("anonymous"));
+        //if (WaitForDebugger)
+        //{
+        //    JsEnv.WaitDebugger();
+        //}
 
-        if (javascript != null)
-        {
-            javascript(PuertsMgr.Instance);
-        }
+        //var javascript = m_JsEnv.Eval<JavaScriptMain>("require('bootstrap.js');", Loader.GetScriptDebugPath("anonymous"));
+
+        //if (javascript != null)
+        //{
+        //    javascript(PuertsMgr.Instance);
+        //}
     }
+
+    async void RunScript()
+    {
+	    m_JsEnv = new JsEnv(Loader, DebuggerPort);
+
+	    this.RegisterClasses(m_JsEnv);
+
+	    if (WaitForDebugger)
+		{
+			await JsEnv.WaitDebuggerAsync();
+	    }
+
+	    var javascript = m_JsEnv.Eval<JavaScriptMain>("require('bootstrap.js');", Loader.GetScriptDebugPath("anonymous"));
+
+	    if (javascript != null)
+	    {
+		    javascript(PuertsMgr.Instance);
+	    }
+	}
 
     protected virtual void RegisterClasses(Puerts.JsEnv env)
     {
