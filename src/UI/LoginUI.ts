@@ -13,4 +13,9 @@ export class LoginUI extends UIWindow{
         super.OnCreate();
         this.m_text.text = "Hello World";
     }
+
+    protected OnUpdate(){
+        super.OnUpdate();
+        console.log("OnUpdate")
+    }
 }

@@ -42,8 +42,8 @@ export class UIManager<T> extends Singleton<T>{
         this.system = this.canvas.Find("System");
     }
 
-    public ShowWindow<T>():UIWindow {
-        let window = new UIWindow;
+    public ShowWindow<T extends UIWindow>(c: new () => T):T{
+        let window = new c as T;
         let typeName = "LoginUI";
         if (!this.CreateWindowByType(window, typeName)){
             {
@@ -52,7 +52,7 @@ export class UIManager<T> extends Singleton<T>{
         }
         // this.listWindows.Add(window);
         window.Show();
-        return window;
+        return window as T;
     }
 
     private CreateWindowByType(window:UIWindow,typeName: string):boolean {
@@ -97,7 +97,7 @@ export class UIManager<T> extends Singleton<T>{
 	}
 
     private Update(delta: number) {
-
+        
 	}
 
     private Destroy() {

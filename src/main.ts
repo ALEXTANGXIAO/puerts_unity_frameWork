@@ -40,15 +40,16 @@ class JavaScriptApplication {
 	private initialize() {
 		let ui = UIManager.Instance(UIManager);
 		ui.Init()
-		var loginUI = ui.ShowWindow() as LoginUI;
+		var loginUI = ui.ShowWindow<LoginUI>(LoginUI);
+		console.log(`initialize`);
 	}
 
 	private start() {
-
+		console.log(`start`);
 	}
 
 	private fixedUpdate(delta: number) {
-
+		
 	}
 
 	private update(delta: number) {
@@ -56,7 +57,7 @@ class JavaScriptApplication {
 	}
 
 	private lateUpdate(delta: number) {
-
+		
 	}
 
 	private finalize() {
