@@ -2,20 +2,31 @@
 
 ## 怎么跑这demo？
 
-* git clone https://github.com/chexiongsheng/puerts_unity_demo.git 
-
-* puerts_unity_demo就是个unity工程，Examples是示例
-
-* 示例01到示例04都是js编写，可以直接修改对应的js代码看效果
-
-* 实例05是typescript工程生成的代码，用vscode打开根目录的TsProj工程，修改ts代码，然后在vscode里打开一个TERMINAL，敲入“npm run build”，这个命令编译并拷贝到相应的目录。
-    - 需要安装vscode，node，npm，typescript
-    - 用window命令行工具到TsProj下执行“npm run build”也可以
-
+0. 确保已安装如下所需的开发工具
+- NodeJS -npm
+- Visual Studio Code
+- Unity 2019.4.8f1 (其他版本未测试)
+1. 克隆该项目，项目结构如下
+    - `src` TypeScript 脚本目录
+    - `Assets/Scripts` C# 代码目录
+    - `Assets/Editor/PuertsConfig.cs` puerts 导出配置
+    - `Assets/Scene/SceneMain.unity` 入口场景
+    - `Assets/StreamingAssets/scripts` 编译生成的 JavaScript 脚本
+2. [下载 puerts 的二进制库](https://github.com/Tencent/puerts/releases)，并解压到`Assets`目录下
+3. 使用Unity打开项目，执行菜单中的`Puerts -> Generate index.d.ts` 导出 C# API
+4. 安装webpack:`npm install -g webpack`  
+5. 安装依赖：进入项目目录执行 `npm install` 或 `yarn install`，国内推荐设置淘宝镜像
+6. 使用 VSCode 打开该项目，执行以下 npm 命令编译 JavaScript 库
+    - `npm run webapi:publish:` 或 `yarn webapi:publish` 编译 WebAPI 兼容库
+    - `npm run bundle:dev` 或 `yarn bundle:dev` 启动项目编译服务
+6. 点击运行，启动游戏，如果一切顺利可以看到如下的日志，大功告成
+	```log
+	已启动 JavaScript 虚拟机
+		at new JavaScriptApplication (src/main.ts:23:13 )
+		at main (src/main.ts:12:10 )
 ## 关于版本
 本demo使用的是最新版本puerts，而非最稳定版本puerts。如果您是处在前期体验阶段，可以切换至1.0.x分支体验。
 > this demo is using the latest version of puerts instead of the stable version. if you found some fatal problem, we suggest you to use the branch 1.0.x.
-
 
 
 ### Unity Puerts 起始项目
@@ -41,10 +52,9 @@
 - Unity 2019.4.8f1 (其他版本未测试)
 1. 克隆该项目，项目结构如下
     - `src` TypeScript 脚本目录
-    - `csharp` C# 代码目录
-    	- `csharp/Libraries` C# 源码库目录
+    - `Assets/Scripts` C# 代码目录
     - `Assets/Editor/PuertsConfig.cs` puerts 导出配置
-    - `Assets/main.unity` 入口场景
+    - `Assets/Scene/SceneMain.unity` 入口场景
     - `Assets/StreamingAssets/scripts` 编译生成的 JavaScript 脚本
 2. [下载 puerts 的二进制库](https://github.com/Tencent/puerts/releases)，并解压到`Assets`目录下
 3. 使用Unity打开项目，执行菜单中的`Puerts -> Generate index.d.ts` 导出 C# API
@@ -52,7 +62,6 @@
 5. 使用 VSCode 打开该项目，执行以下 npm 命令编译 JavaScript 库
     - `npm run webapi:publish:` 或 `yarn webapi:publish` 编译 WebAPI 兼容库
     - `npm run bundle:dev` 或 `yarn bundle:dev` 启动项目编译服务
-![](screenshot/start.png)
 6. 点击运行，启动游戏，如果一切顺利可以看到如下的日志，大功告成
 	```log
 	已启动 JavaScript 虚拟机
@@ -76,7 +85,6 @@
 |test:dev| 启动单元测试的编译服务 |
 
 上述所有命令可以在在VSCode编辑的 NPM 脚本面板中一键启动
-![](screenshot/npm.png)
 
 ### 单元测试
 
