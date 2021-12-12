@@ -54,6 +54,7 @@ class JavaScriptApplication {
 
 	private update(delta: number) {
 		WebAPI.tick();
+		UIManager.Instance(UIManager).Update(delta);
 	}
 
 	private lateUpdate(delta: number) {

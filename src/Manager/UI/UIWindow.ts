@@ -11,6 +11,7 @@ export class UIWindow{
     protected m_canvas: UnityEngine.Canvas;
     protected m_visible:boolean;
     protected m_destroyed:boolean = true;
+    public IsDestroyed:boolean = false;
 
     public get gameObject(): UnityEngine.GameObject {
         return this.m_go;
@@ -22,7 +23,7 @@ export class UIWindow{
 
     public get name(): string {
         if(this.m_name == null){
-            this.m_name = "UIWindow";
+            this.m_name = this.constructor.name;
         }
         return this.m_name;
     }
@@ -89,9 +90,8 @@ export class UIWindow{
         }
     }
 
-    protected  ScriptGenerator()
-{
-        console.log("ScriptGenerator");
+    protected  ScriptGenerator(){
+        
     }
 
     protected  RegisterEvent(){
@@ -99,7 +99,7 @@ export class UIWindow{
     }
 
     protected OnCreate(){
-        console.log("OnCreate");
+        
     }
 
     public Update():boolean

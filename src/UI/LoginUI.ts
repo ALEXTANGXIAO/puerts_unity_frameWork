@@ -1,6 +1,7 @@
 import {UnityEngine} from 'csharp'
 import {$typeof} from 'puerts'
 import {UIWindow} from 'Manager/UI/UIWindow'
+
 export class LoginUI extends UIWindow{
     private m_text:UnityEngine.UI.Text;
 
@@ -16,6 +17,6 @@ export class LoginUI extends UIWindow{
 
     protected OnUpdate(){
         super.OnUpdate();
-        console.log("OnUpdate")
+        // console.log("OnUpdate")
     }
 }

@@ -1,15 +1,15 @@
 import {Singleton} from "../../core/Singleton"
-
+import {UIManager} from "Manager/UI/UIManager"
 export class UISys<T> extends Singleton<T>{
-    private OnStart() {
+    public OnStart() {
 
 	}
 
-    private Update(delta: number) {
-
+    public Update(delta: number) {
+        UIManager.Instance(UIManager).Update(delta);
 	}
 
-    private Destroy() {
+    public Destroy() {
 
 	}
 }

@@ -21,7 +21,7 @@ export class UIManager<T> extends Singleton<T>{
     private top: UnityEngine.Transform
     private system: UnityEngine.Transform
     private uiid:number;
-    // private listWindows:System.Collections.Generic.List$1<UIWindow> = new System.Collections.Generic.List$1<UIWindow>();
+    private UIList:UIWindow[] = new Array<UIWindow>();
 
     constructor(){
         super();
@@ -42,24 +42,26 @@ export class UIManager<T> extends Singleton<T>{
         this.system = this.canvas.Find("System");
     }
 
-    public ShowWindow<T extends UIWindow>(c: new () => T):T{
-        let window = new c as T;
-        let typeName = "LoginUI";
+    public ShowWindow<T extends UIWindow>(win: new () => T):T{
+        let window = new win as T;
+        let typeName = window.name;
+        console.log(typeName)
         if (!this.CreateWindowByType(window, typeName)){
             {
                 return null;
             }
         }
+        this.UIList.push(window);
         // this.listWindows.Add(window);
         window.Show();
-        return window as T;
+        return window;
     }
 
     private CreateWindowByType(window:UIWindow,typeName: string):boolean {
         let resPath = "UI/" + typeName;
         let gameObject = ResourceMgr.Instance(ResourceMgr).Load(resPath);
         if(gameObject == null){
-            UnityEngine.Debug.LogError("CreateWindowByType failed, " + typeName + resPath);
+            UnityEngine.Debug.LogError("CreateWindowByType failed,typeName:" + typeName +" resPath:"+ resPath);
             return false;
         }
         gameObject.name = typeName;
@@ -92,15 +94,20 @@ export class UIManager<T> extends Singleton<T>{
         
     }
 
-    private OnStart() {
+    public OnStart() {
 
 	}
 
-    private Update(delta: number) {
-        
+    public Update(delta: number) {
+        for (var i = 0; i < this.UIList.length; i++){
+            var window = this.UIList[i];
+            if(!window.IsDestroyed){
+                window.Update();
+            }
+        }
 	}
 
-    private Destroy() {
+    public Destroy() {
 
 	}
 }
