@@ -1,4 +1,4 @@
-# unity demo for puerts
+# puerts framework for unity
 
 ## 怎么跑这demo？
 
