@@ -12,11 +12,13 @@ public class GameApp : UnitySingleton<GameApp>
 
     public DEV_MODE Mode = DEV_MODE.FWK;
 
+    public bool UseABMode = false;
+
     public bool WaitForDebugger = false;
 
 	void Start()
-    {
-        PuertsMgr.Instance.Init();
+	{
+		PuertsMgr.Instance.Init();
     }
 
     void Update()

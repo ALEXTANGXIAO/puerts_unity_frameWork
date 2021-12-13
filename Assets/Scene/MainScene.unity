@@ -244,10 +244,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000208922}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 355fd61625732f640b8c58960fd4147b, type: 3}
+  m_Script: {fileID: 11500000, guid: deb72ebc85a713b4990bf8d3852817f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Mode: 0
+  UseABMode: 1
   WaitForDebugger: 0
 --- !u!1 &1962775997
 GameObject:

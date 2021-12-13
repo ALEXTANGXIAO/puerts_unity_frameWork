@@ -164,6 +164,7 @@ public class PuertsConfig2
 			types.Add(typeof(UnityEngine.Input));
 			types.Add(typeof(UnityEngine.Mathf));
 
+			types.Add(typeof(UnityEngine.AssetBundle));
 			types.Add(typeof(UnityEngine.Camera));
 			types.Add(typeof(UnityEngine.ParticleSystem));
 			types.Add(typeof(UnityEngine.AudioSource));

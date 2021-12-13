@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using Puerts;
 using UnityEngine;
 
@@ -40,7 +40,15 @@ public class PuertsLoader:ILoader
             var asset = UnityEngine.Resources.Load<UnityEngine.TextAsset>(filepath);
             return asset.text;
         }
-        return File.ReadAllText(Path.Combine(LocalScriptFolder, filepath));
+
+        if (GameApp.Instance.UseABMode)
+        {
+	        return AssetBundleManager.Instance.GetAssetCache("puerts_scripts", filepath).ToString();
+		}
+        else
+        {
+	        return File.ReadAllText(Path.Combine(LocalScriptFolder, filepath));
+        }
     }
 
     public void Close() { }
