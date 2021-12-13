@@ -7,9 +7,11 @@ if (!PRODUCTION) {
 	};
 }
 
-import {UIManager} from "./Manager/UI/UIManager";
-import {UnityEngine} from 'csharp'
-import {LoginUI} from 'UI/LoginUI'
+import { UIManager } from "./Manager/UI/UIManager";
+import { UnityEngine } from 'csharp'
+import { LoginUI } from 'UI/LoginUI'
+import { GameApp } from 'Manager/GameApp';
+import { UISys } from "Manager/UI/UISys";
 
 interface IScriptLauncher {
 	JS_start(): void;
@@ -38,6 +40,9 @@ class JavaScriptApplication {
 	}
 
 	private initialize() {
+		var gamApp = GameApp.Instance(GameApp);
+		gamApp.AddLogicSys(UISys.Instance(UISys));
+
 		let ui = UIManager.Instance(UIManager);
 		ui.Init()
 		var loginUI = ui.ShowWindow<LoginUI>(LoginUI);
@@ -46,23 +51,26 @@ class JavaScriptApplication {
 
 	private start() {
 		console.log(`start`);
+		GameApp.Instance(GameApp).OnStart();
+		UnityEngine.Debug.Log("Start")
 	}
 
 	private fixedUpdate(delta: number) {
-		
+
 	}
 
 	private update(delta: number) {
 		WebAPI.tick();
-		UIManager.Instance(UIManager).Update(delta);
+		GameApp.Instance(GameApp).OnUpdate();
 	}
 
 	private lateUpdate(delta: number) {
-		
+		GameApp.Instance(GameApp).OnLateUpdate();
 	}
 
 	private finalize() {
 		WebAPI.finalize();
+		GameApp.Instance(GameApp).OnDestroy();
 		console.log(`关闭 JavaScript 虚拟机`);
 	}
 }

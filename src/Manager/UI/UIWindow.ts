@@ -1,17 +1,17 @@
-import {UnityEngine} from 'csharp'
-import {$typeof} from 'puerts'
-import {UIManager} from 'Manager/UI/UIManager'
+import { UnityEngine } from 'csharp'
+import { $typeof } from 'puerts'
+import { UIManager } from 'Manager/UI/UIManager'
 
-export class UIWindow{
-    public Uiid:number;
-    protected m_name:string;
+export class UIWindow {
+    public Uiid: number;
+    protected m_name: string;
     protected m_go: UnityEngine.GameObject;
     protected m_transform: UnityEngine.RectTransform;
     protected m_parent: UIWindow;
     protected m_canvas: UnityEngine.Canvas;
-    protected m_visible:boolean;
-    protected m_destroyed:boolean = true;
-    public IsDestroyed:boolean = false;
+    protected m_visible: boolean;
+    protected m_destroyed: boolean = true;
+    public IsDestroyed: boolean = false;
 
     public get gameObject(): UnityEngine.GameObject {
         return this.m_go;
@@ -22,20 +22,18 @@ export class UIWindow{
     }
 
     public get name(): string {
-        if(this.m_name == null){
+        if (this.m_name == null) {
             this.m_name = this.constructor.name;
         }
         return this.m_name;
     }
 
-    public Create(gameObject: UnityEngine.GameObject):boolean
-    {
-        if(!this.CreateBase(gameObject)){
+    public Create(gameObject: UnityEngine.GameObject): boolean {
+        if (!this.CreateBase(gameObject)) {
             return false;
         }
 
-        if (this.m_canvas != null)
-        {
+        if (this.m_canvas != null) {
             this.m_canvas.overrideSorting = true;
         }
 
@@ -45,14 +43,12 @@ export class UIWindow{
         return true;
     }
 
-    protected CreateBase(gameObject: UnityEngine.GameObject):boolean
-    {
-        if (!this.m_destroyed)
-        {
+    protected CreateBase(gameObject: UnityEngine.GameObject): boolean {
+        if (!this.m_destroyed) {
             return false;
         }
 
-        if(gameObject == null){
+        if (gameObject == null) {
             return false;
         }
 
@@ -67,50 +63,46 @@ export class UIWindow{
         return true;
     }
 
-    public Show(visible: boolean = true){
-        if (this.m_destroyed || this.gameObject == null)
-        {
+    public Show(visible: boolean = true) {
+        if (this.m_destroyed || this.gameObject == null) {
             return;
         }
-        if(this.m_visible != visible){
+        if (this.m_visible != visible) {
             this.m_visible = visible;
-            if(visible){
+            if (visible) {
                 this.gameObject.SetActive(true);
                 this.OnVisible();
             }
-            else{
+            else {
                 this.Hide();
-                if(this.gameObject == null){
+                if (this.gameObject == null) {
                     UnityEngine.Debug.LogError("ui bug, hiden destory gameobject: " + this.m_name);
                 }
-                else{
+                else {
                     this.gameObject.SetActive(false);
                 }
             }
         }
     }
 
-    protected  ScriptGenerator(){
-        
-    }
-
-    protected  RegisterEvent(){
+    protected ScriptGenerator() {
 
     }
 
-    protected OnCreate(){
-        
+    protected RegisterEvent() {
+
     }
 
-    public Update():boolean
-    {
-        if (!this.m_visible || this.m_destroyed)
-        {
+    protected OnCreate() {
+
+    }
+
+    public Update(): boolean {
+        if (!this.m_visible || this.m_destroyed) {
             return false;
         }
 
-        if (this.m_go.activeSelf == false)
-        {
+        if (this.m_go.activeSelf == false) {
             return false;
         }
 
@@ -119,22 +111,19 @@ export class UIWindow{
         return true;
     }
 
-    protected OnUpdate(){
+    protected OnUpdate() {
 
     }
 
-    public Hide()
-    {
+    public Hide() {
 
     }
 
-    protected OnVisible()
-    {
+    protected OnVisible() {
 
     }
 
-    protected OnDestroy()
-    {
+    protected OnDestroy() {
 
     }
 }

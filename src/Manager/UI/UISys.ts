@@ -1,15 +1,15 @@
-import {Singleton} from "../../core/Singleton"
-import {UIManager} from "Manager/UI/UIManager"
-export class UISys<T> extends Singleton<T>{
+import { UIManager } from "Manager/UI/UIManager"
+import { BaseLogicSys } from "core/BaseLogicSys";
+export class UISys<T> extends BaseLogicSys<T>{
     public OnStart() {
+        UIManager.Instance(UIManager).OnStart();
+    }
 
-	}
+    public OnUpdate() {
+        UIManager.Instance(UIManager).OnUpdate();
+    }
 
-    public Update(delta: number) {
-        UIManager.Instance(UIManager).Update(delta);
-	}
-
-    public Destroy() {
-
-	}
+    public OnDestroy() {
+        UIManager.Instance(UIManager).OnDestroy();
+    }
 }

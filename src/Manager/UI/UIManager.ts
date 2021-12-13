@@ -1,9 +1,10 @@
-import {Singleton} from "../../core/Singleton"
+import { Singleton } from "../../core/Singleton"
 import { ResourceMgr } from "Manager/Resource/ResourceMgr";
-import {UnityEngine} from 'csharp'
-import {UIWindow} from 'Manager/UI/UIWindow'
-import {System} from 'csharp'
-import {$typeof} from 'puerts'
+import { UnityEngine } from 'csharp'
+import { UIWindow } from 'Manager/UI/UIWindow'
+import { System } from 'csharp'
+import { $typeof } from 'puerts'
+import { BaseLogicSys } from "core/BaseLogicSys";
 
 
 export enum UI_Layer {
@@ -20,21 +21,21 @@ export class UIManager<T> extends Singleton<T>{
     private mid: UnityEngine.Transform
     private top: UnityEngine.Transform
     private system: UnityEngine.Transform
-    private uiid:number;
-    private UIList:UIWindow[] = new Array<UIWindow>();
+    private uiid: number;
+    private UIList: UIWindow[] = new Array<UIWindow>();
 
-    constructor(){
+    constructor() {
         super();
         // console.log("UIManager")
         // let gameObject = new UnityEngine.GameObject('UIRoot');
         // UnityEngine.GameObject.DontDestroyOnLoad(gameObject);
 
-        let CanvasGameObject =  ResourceMgr.Instance(ResourceMgr).Load("UI/Canvas");
+        let CanvasGameObject = ResourceMgr.Instance(ResourceMgr).Load("UI/Canvas");
         UnityEngine.GameObject.DontDestroyOnLoad(CanvasGameObject);
 
         let EventSystem = ResourceMgr.Instance(ResourceMgr).Load("UI/EventSystem");
         UnityEngine.GameObject.DontDestroyOnLoad(EventSystem);
-        
+
         this.canvas = CanvasGameObject.transform as UnityEngine.RectTransform;
         this.bottom = this.canvas.Find("Bottom");
         this.mid = this.canvas.Find("Mid");
@@ -42,11 +43,11 @@ export class UIManager<T> extends Singleton<T>{
         this.system = this.canvas.Find("System");
     }
 
-    public ShowWindow<T extends UIWindow>(win: new () => T):T{
+    public ShowWindow<T extends UIWindow>(win: new () => T): T {
         let window = new win as T;
         let typeName = window.name;
         console.log(typeName)
-        if (!this.CreateWindowByType(window, typeName)){
+        if (!this.CreateWindowByType(window, typeName)) {
             {
                 return null;
             }
@@ -57,11 +58,11 @@ export class UIManager<T> extends Singleton<T>{
         return window;
     }
 
-    private CreateWindowByType(window:UIWindow,typeName: string):boolean {
+    private CreateWindowByType(window: UIWindow, typeName: string): boolean {
         let resPath = "UI/" + typeName;
         let gameObject = ResourceMgr.Instance(ResourceMgr).Load(resPath);
-        if(gameObject == null){
-            UnityEngine.Debug.LogError("CreateWindowByType failed,typeName:" + typeName +" resPath:"+ resPath);
+        if (gameObject == null) {
+            UnityEngine.Debug.LogError("CreateWindowByType failed,typeName:" + typeName + " resPath:" + resPath);
             return false;
         }
         gameObject.name = typeName;
@@ -78,11 +79,9 @@ export class UIManager<T> extends Singleton<T>{
         rectTransform.anchorMin = UnityEngine.Vector2.zero;
         rectTransform.anchorMax = UnityEngine.Vector2.one;
 
-        if (!window.Create(gameObject))
-        {
-            UnityEngine.Debug.LogError("window create failed, typeName: "+ typeName);
-            if (gameObject != null)
-            {
+        if (!window.Create(gameObject)) {
+            UnityEngine.Debug.LogError("window create failed, typeName: " + typeName);
+            if (gameObject != null) {
                 UnityEngine.Object.Destroy(gameObject);
             }
             return false;
@@ -90,24 +89,24 @@ export class UIManager<T> extends Singleton<T>{
         return true;
     }
 
-    public Init(){
-        
+    public Init() {
+
     }
 
     public OnStart() {
 
-	}
+    }
 
-    public Update(delta: number) {
-        for (var i = 0; i < this.UIList.length; i++){
+    public OnUpdate() {
+        for (var i = 0; i < this.UIList.length; i++) {
             var window = this.UIList[i];
-            if(!window.IsDestroyed){
+            if (!window.IsDestroyed) {
                 window.Update();
             }
         }
-	}
+    }
 
-    public Destroy() {
+    public OnDestroy() {
 
-	}
+    }
 }
