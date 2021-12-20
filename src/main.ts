@@ -42,17 +42,15 @@ class JavaScriptApplication {
 	private initialize() {
 		var gamApp = GameApp.Instance(GameApp);
 		gamApp.AddLogicSys(UISys.Instance(UISys));
-
-		let ui = UIManager.Instance(UIManager);
-		ui.Init()
-		var loginUI = ui.ShowWindow<LoginUI>(LoginUI);
+		UIManager.Instance(UIManager);
 		console.log(`initialize`);
 	}
 
 	private start() {
 		console.log(`start`);
 		GameApp.Instance(GameApp).OnStart();
-		UnityEngine.Debug.Log("Start")
+
+		var loginUI = UIManager.Instance(UIManager).ShowWindow<LoginUI>(LoginUI);
 	}
 
 	private fixedUpdate(delta: number) {

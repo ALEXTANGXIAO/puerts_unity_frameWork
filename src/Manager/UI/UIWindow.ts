@@ -85,6 +85,14 @@ export class UIWindow {
         }
     }
 
+    public CloseWindow() {
+        this.gameObject.SetActive(false);
+    }
+
+    public Close() {
+        UIManager.Instance(UIManager).CloseWindow(this);
+    }
+
     protected ScriptGenerator() {
 
     }

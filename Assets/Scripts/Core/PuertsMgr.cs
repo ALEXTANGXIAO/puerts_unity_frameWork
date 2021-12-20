@@ -20,6 +20,7 @@ public class PuertsMgr : UnitySingleton<PuertsMgr>
 		}
 	}
 
+	public Action JS_start;
 	public Action<float> JS_update;
 	public Action<float> JS_fixedUpdate;
 	public Action<float> JS_lateUpdate;
@@ -51,21 +52,6 @@ public class PuertsMgr : UnitySingleton<PuertsMgr>
 
 
 		RunScript();
-		//m_JsEnv = new JsEnv(Loader, DebuggerPort);
-
-		//this.RegisterClasses(m_JsEnv);
-
-		//if (WaitForDebugger)
-		//{
-		//    JsEnv.WaitDebugger();
-		//}
-
-		//var javascript = m_JsEnv.Eval<JavaScriptMain>("require('bootstrap.js');", Loader.GetScriptDebugPath("anonymous"));
-
-		//if (javascript != null)
-		//{
-		//    javascript(PuertsMgr.Instance);
-		//}
 	}
 
 	async void RunScript()
@@ -87,6 +73,8 @@ public class PuertsMgr : UnitySingleton<PuertsMgr>
 		{
 			javascript(PuertsMgr.Instance);
 		}
+
+		JS_start();
 	}
 
 	protected virtual void RegisterClasses(Puerts.JsEnv env)

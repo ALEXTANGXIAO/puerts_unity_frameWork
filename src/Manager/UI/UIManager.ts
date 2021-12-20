@@ -5,7 +5,7 @@ import { UIWindow } from 'Manager/UI/UIWindow'
 import { System } from 'csharp'
 import { $typeof } from 'puerts'
 import { BaseLogicSys } from "core/BaseLogicSys";
-
+import List from "core/System/List";
 
 export enum UI_Layer {
     Bottom,
@@ -22,7 +22,7 @@ export class UIManager<T> extends Singleton<T>{
     private top: UnityEngine.Transform
     private system: UnityEngine.Transform
     private uiid: number;
-    private UIList: UIWindow[] = new Array<UIWindow>();
+    private UIList: List<UIWindow> = new List<UIWindow>();
 
     constructor() {
         super();
@@ -52,10 +52,17 @@ export class UIManager<T> extends Singleton<T>{
                 return null;
             }
         }
-        this.UIList.push(window);
-        // this.listWindows.Add(window);
+        this.UIList.add(window);
         window.Show();
         return window;
+    }
+
+    public CloseWindow<T extends UIWindow>(win: T) {
+        let window = win as T;
+        let typeName = window.name;
+        console.log(typeName)
+        window.CloseWindow();
+        this.UIList.remove(window);
     }
 
     private CreateWindowByType(window: UIWindow, typeName: string): boolean {
