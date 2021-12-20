@@ -248,7 +248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Mode: 0
-  UseABMode: 1
+  UseABMode: 0
   WaitForDebugger: 0
 --- !u!1 &1962775997
 GameObject:
